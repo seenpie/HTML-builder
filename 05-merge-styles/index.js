@@ -15,7 +15,7 @@ fs.readdir(directoryPath, { withFileTypes: true }, (err, files) => {
           const { ext } = path.parse(el.name);
           if (ext === '.css') {
             const readStream = fs.createReadStream(
-              el.path + `\\${el.name}`,
+              el.path + `/${el.name}`,
               'utf8',
             );
             readStream.on('data', (data) => writeStream.write(data + '\n'));

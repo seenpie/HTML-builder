@@ -55,7 +55,7 @@ const mergeHTMLFiles = async () => {
       if (ext !== '.html') break;
       const placeholderRegex = new RegExp(`{{${name}}}`);
       const replaceContent = await fs.readFile(
-        htmlComponentsDirectory + `\\${comp}`,
+        htmlComponentsDirectory + `/${comp}`,
         'utf8',
       );
       templateHtml = templateHtml.replace(
@@ -63,7 +63,7 @@ const mergeHTMLFiles = async () => {
         '\n' + replaceContent,
       );
     }
-    await fs.writeFile(outputDirectory + '\\index.html', templateHtml, 'utf8');
+    await fs.writeFile(outputDirectory + '/index.html', templateHtml, 'utf8');
   } catch (error) {
     console.log(error);
   }
@@ -81,7 +81,7 @@ const mergeCSSFiles = async () => {
     const cssContents = await Promise.all(promises);
     const concatenateCss = cssContents.join('');
 
-    await fs.writeFile(outputDirectory + '\\style.css', concatenateCss, 'utf8');
+    await fs.writeFile(outputDirectory + '/style.css', concatenateCss, 'utf8');
   } catch (error) {
     console.log(error);
   }
@@ -89,7 +89,7 @@ const mergeCSSFiles = async () => {
 
 const build = async () => {
   await mkDirOutputDirectory();
-  await copyDirectory(assetsDirectory, outputDirectory + '\\assets');
+  await copyDirectory(assetsDirectory, outputDirectory + '/assets');
   await mergeHTMLFiles();
   await mergeCSSFiles();
 };
